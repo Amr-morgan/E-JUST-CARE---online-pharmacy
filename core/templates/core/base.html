@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-JUST Care+ | Online Pharmacy{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <h1>E-JUST Care+</h1>
+                    <p>Online Pharmacy</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search medicines..." />
+                        <button type="button" class="search-btn">Search</button>
+                    </div>
+                    
+                    <div class="header-actions">
+                        {% if user.is_authenticated %}
+                            <a href="#" class="account-link">
+                                <span class="icon">👤</span>
+                                <span>{{ user.username }}</span>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="account-link">
+                                <span class="icon">👤</span>
+                                <span>Login</span>
+                            </a>
+                        {% endif %}
+                        
+                        <a href="{% url 'cart' %}" class="cart-link">
+                            <span class="icon">🛒</span>
+                            <span>Cart</span>
+                            <span class="cart-badge">2</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-wrap">
+                <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+                <nav class="navbar" id="main-nav">
+                    <a href="{% url 'home' %}" class="active">Home</a>
+                    <a href="{% url 'home' %}#medicines">Medicines</a>
+                    <a href="{% url 'prescription' %}">Upload Prescription</a>
+                    <a href="{% url 'cart' %}">Cart</a>
+                    <a href="{% url 'tracking' %}">Track Order</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MediCare+</h3>
+                    <p><b>Your trusted online pharmacy</b></p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'prescription' %}">Upload Prescription</a></li>
+                        <li><a href="{% url 'cart' %}">Shopping Cart</a></li>
+                        <li><a href="{% url 'tracking' %}">Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'contact' %}#faq-section">FAQs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📞 +201204401118</p>
+                    <p>✉️ amr.320240012@ejust.edu.eg</p>
+                    <p>📍 Egypt Japan University</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 E-JUST Care+. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'core/js/scripts.js' %}"></script>
+</body>
+</html>

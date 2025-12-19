@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register - Online Pharmacy</title>
+        <link rel="icon" href="{% static 'acc/images/logo.png' %}" type="image/png">
+        <link rel="stylesheet" href="{% static 'acc/css/register.css' %}">
+    </head>
+    <body>
+        <div class="register-bg" style="background-image: url('{% static 'acc/images/background.png' %}');">
+            <div class="register-card">
+                <h1>Register</h1>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" id="registration_form">
+                    {% csrf_token %}
+            
+                    <!-- Username -->
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.username }}
+
+                    <!-- Email -->
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    <div id="emailInfo"></div>
+
+                    <!-- Password -->
+                    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    {{ form.password }}
+                    <div id="passwordStrength"></div>
+
+
+                    <!-- Show/Hide password -->
+                    <span id="togglePassword" class="toggle-icon">Show</span>
+                    
+                    <!-- Confirm Password -->
+                    <label for="{{ form.confirm.id_for_label }}">{{ form.confirm.label }}</label>
+                    {{ form.confirm }}
+                    <div id="passwordMatch"></div>
+
+                    <!-- Show/Hide confirm password -->
+                    <span id="toggleConfirm" class="toggle-icon">Show</span>
+
+                    <!-- Submit -->
+                    <button type="submit" id="register-btn">Register</button>
+
+                </form>
+
+                <!-- Login Link -->
+                <div class="login-link">
+                    Already have an account?
+                    <a href="{% url 'login' %}" id="loginLink">Log in here</a>.
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'acc/js/register.js' %}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,160 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e8f1ff, #f6fbff);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== CONTAINER (Glass Effect Card) ===== */
+.register-card {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(15px);
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    animation: fadeIn 0.7s ease;
+}
+
+/* ===== FADE-IN ANIMATION ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== TITLE ===== */
+.register-card h1 {
+    text-align: center;
+    color: #005bbb;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* ===== LABELS ===== */
+.register-card label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #003f6e;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* ===== INPUT FIELDS ===== */
+.register-card input {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #bcccdd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.25s;
+    background: #f8fbff;
+}
+
+/* INPUT FOCUS EFFECT */
+.register-card input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0,123,255,0.4);
+}
+
+/* ===== ERRORS AND MESSAGES ===== */
+.error {
+    color: #d60000;
+    font-size: 0.9em;
+    margin-top: 3px;
+}
+
+.message {
+    color: #008000;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.register-card button {
+    width: 100%;
+    padding: 13px;
+    background: #007bff;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+/* HOVER EFFECT */
+.register-card button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== LOGIN LINK ===== */
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #003f6e;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+/* Fade-out animation */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.register-bg {
+    background-position: center;   /* center the image */
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    min-width: 100vw;             /* full screen height */
+    display: flex;                 /* center form */
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.register-bg::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3);  /* dark overlay, adjust opacity */
+    z-index: 1;
+}
+
+.register-card {
+    position: relative;
+    z-index: 2;   /* keep form above overlay */
+}

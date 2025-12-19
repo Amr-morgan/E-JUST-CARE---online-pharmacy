@@ -1,0 +1,56 @@
+<!--{% csrf_token %}   for security-->
+<!--{% load static %}   for images and other POST requests-->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - Online Pharmacy</title>
+        <link rel="icon" href="{% static 'acc/images/logo.png' %}" type="image/png">
+        <link rel="stylesheet" href="{% static 'acc/css/login.css' %}">
+    </head>
+    <body>
+        <div class="login-bg" style="background-image: url('{% static 'acc/images/background.png' %}');">
+            <div class="login-card">
+                <h1>Login</h1>
+
+                <!-- Display messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Login Form -->
+                <form method="post" id="login_form">
+                    {% csrf_token %}
+
+                    <!-- Username -->
+                    <label for="{{form.username.id_for_label}}">{{ form.username.label }}</label>
+                    {{ form.username }}
+
+                    <!-- Password -->
+                    <label for="{{form.password.id_for_label}}">{{ form.password.label }}</label>
+                    {{ form.password }}
+
+                    <!-- Show/Hide password -->
+                    <span id="togglePassword" class="toggle-icon">Show</span>
+                    
+                    <!-- Submit -->
+                    <button type="submit" id="login-btn">Login</button>
+                </form>
+
+                <!-- Registration Link -->
+                <div class="register-link">
+                    Don't have an account?
+                    <a href="{% url 'register' %}" id="registerLink">Register here</a>.
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'acc/js/login.js' %}"></script>
+    </body>
+</html>

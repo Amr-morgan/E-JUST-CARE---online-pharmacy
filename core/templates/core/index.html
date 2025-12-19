@@ -1,0 +1,151 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home | E-JUSTCare+{% endblock %}
+
+{% block content %}
+
+<!-- Hero section the first section in the page -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h2>Welcome to E-JUST Care+</h2>
+            <pre>Your trusted online pharmacy. Get medicines delivered to your doorstep.
+        Fast, reliable, and secure. Genereted by Amr Morgan 2<sup>nd</sup> year Computer Science student.</pre>
+            </pre>
+
+
+            
+            <div class="hero-buttons">
+                <a href="#medicines" class="btn btn-primary">Shop Now</a>
+                <a href="{% url 'prescription' %}" class="btn btn-secondary">Upload Prescription</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        
+        <div class="categories">
+            <div class="category-item">
+                <div class="category-icon">💊</div>
+                <h3>Prescription Drugs</h3>
+                <a href="#" class="category-link">Browse</a>
+            </div>
+            
+            <div class="category-item">
+                <div class="category-icon">🏥</div>
+                <h3>OTC Medicines</h3>
+                <a href="#" class="category-link">Browse</a>
+            </div>
+            
+            <div class="category-item">
+                <div class="category-icon">💉</div>
+                <h3>Health Devices</h3>
+                <a href="#" class="category-link">Browse</a>
+            </div>
+            
+            <div class="category-item">
+                <div class="category-icon">🌿</div>
+                <h3>Wellness</h3>
+                <a href="#" class="category-link">Browse</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="section" id="medicines">
+    <div class="container">
+        <h2 class="section-title">Featured Products</h2>
+
+        <div class="products-grid">
+
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-icon">💊</span>
+                </div>
+                <div class="product-info">
+                    <h3>Paracetamol 500mg</h3>
+                    <p>Pain relief medication</p>
+                    <div class="product-price">$12.99</div>
+                    <button class="btn btn-small btn-primary">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-icon">💊</span>
+                </div>
+                <div class="product-info">
+                    <h3>Vitamin D3</h3>
+                    <p>Vitamin supplement</p>
+                    <div class="product-price">$24.99</div>
+                    <button class="btn btn-small btn-primary">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-icon">🩺</span>
+                </div>
+                <div class="product-info">
+                    <h3>Blood Pressure Monitor</h3>
+                    <p>Digital monitor</p>
+                    <div class="product-price">$89.99</div>
+                    <button class="btn btn-small btn-primary">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="product-icon">💊</span>
+                </div>
+                <div class="product-info">
+                    <h3>Omega-3 Fish Oil</h3>
+                    <p>Dietary supplement</p>
+                    <div class="product-price">$19.99</div>
+                    <button class="btn btn-small btn-primary">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="section services-section">
+    <div class="container">
+        <div class="services">
+
+            <div class="service-item">
+                <div class="service-icon">🚚</div>
+                <h3>Free Delivery</h3>
+                <p>On orders over $50</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">🛡️</div>
+                <h3>100% Genuine</h3>
+                <p>Verified products</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">💬</div>
+                <h3>24/7 Support</h3>
+                <p>Expert assistance</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">🔒</div>
+                <h3>Secure Payment</h3>
+                <p>Safe transactions</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,167 @@
+/* ================================
+   GLOBAL PAGE STYLING
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* ================================
+   BACKGROUND
+================================ */
+.login-bg {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================================
+   LOGIN CARD
+================================ */
+.login-card {
+    width: 360px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 35px 28px;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.7s ease;
+}
+
+.login-card h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0b6ecf;
+    font-size: 28px;
+}
+
+/* ================================
+   FORM FIELDS
+================================ */
+.login-card label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #c7c7c7;
+    outline: none;
+    font-size: 15px;
+    transition: border 0.2s;
+}
+
+.login-card input:focus {
+    border-color: #0b6ecf;
+}
+
+.password-field {
+    position: relative;
+}
+
+/* ================================
+   SHOW / HIDE PASSWORD
+================================ */
+.togglePassword {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+.togglePassword:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   BUTTON
+================================ */
+.login-card button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    font-size: 17px;
+    background: #0b6ecf;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.login-card button:hover {
+    background: #095bab;
+}
+
+.login-card button:active {
+    transform: scale(0.97);
+}
+
+/* ================================
+   ERROR / INFO MESSAGES
+================================ */
+.info {
+    font-size: 13px;
+    color: #777;
+    margin-top: 4px;
+}
+
+.message {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 10px;
+    border-left: 4px solid red;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: rgb(180, 0, 0);
+    font-size: 14px;
+}
+
+/* ================================
+   REGISTER LINK
+================================ */
+.register-link {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.register-link a {
+    color: #0b6ecf;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   ANIMATION
+================================ */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
+@media (max-width: 400px) {
+    .login-card {
+        width: 90%;
+        padding: 25px 20px;
+    }
+}

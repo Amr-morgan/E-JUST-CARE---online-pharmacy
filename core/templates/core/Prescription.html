@@ -1,0 +1,138 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Upload Prescription | MediCare+{% endblock %}
+
+{% block content %}
+
+    <!-- Prescription Upload Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Upload Your Prescription</h2>
+            <p class="section-subtitle">Our licensed pharmacists will review and verify your prescription</p>
+            
+            <div class="prescription-container">
+                <!-- Upload Form -->
+                <div class="prescription-upload-box">
+                    <h3>Upload Prescription Image or PDF</h3>
+                    
+                    <form id="prescription-form" class="form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% if messages %}
+                            <div class="messages">
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="form-group">
+                            <label for="patient-name">Patient Name *</label>
+                            <input type="text" id="patient-name" name="patient_name" required="required" value="{{ form.patient_name.value|default:'' }}" />
+                            {% if form.patient_name.errors %}
+                                <span class="error">{{ form.patient_name.errors }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required="required" value="{{ form.phone.value|default:'' }}" />
+                            {% if form.phone.errors %}
+                                <span class="error">{{ form.phone.errors }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required="required" value="{{ form.email.value|default:'' }}" />
+                            {% if form.email.errors %}
+                                <span class="error">{{ form.email.errors }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Prescription Files *</label>
+                            <div class="upload-area" id="upload-area">
+                                <div class="upload-content">
+                                    <div class="upload-icon">📄</div>
+                                    <p>Drag and drop files here or click to browse</p>
+                                    <p class="upload-note">Supported: JPG, PNG, PDF (Max 5MB)</p>
+                                    <input type="file" id="prescription-file" name="prescription_files" accept="image/*,.pdf" multiple="multiple" style="display: none;" />
+                                    <button type="button" class="btn btn-secondary" id="browse-btn">Choose Files</button>
+                                </div>
+                                <div id="file-list" class="file-list"></div>
+                            </div>
+                            {% if form.prescription_files.errors %}
+                                <span class="error">{{ form.prescription_files.errors }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Additional Notes (Optional)</label>
+                            <textarea id="notes" name="notes" rows="4" placeholder="Any special instructions or queries...">{{ form.notes.value|default:'' }}</textarea>
+                            {% if form.notes.errors %}
+                                <span class="error">{{ form.notes.errors }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">Submit Prescription</button>
+                    </form>
+                </div>
+                
+                <!-- Chat Support -->
+                <div class="prescription-chat-box">
+                    <h3>Need Help?</h3>
+                    <p>Chat with our pharmacist if you have any questions</p>
+                    
+                    <div class="chat-container" id="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="chat-message chat-message-system">
+                                <p>Welcome! How can we help you today?</p>
+                            </div>
+                        </div>
+                        
+                        <form class="chat-input-form" id="chat-form">
+                            {% csrf_token %}
+                            <input type="text" id="chat-input" placeholder="Type your message..." />
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="prescription-info">
+                <h3>How it Works</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Upload Prescription</h4>
+                        <p>Upload a clear image or PDF of your valid prescription</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Pharmacist Review</h4>
+                        <p>Our licensed pharmacist will verify your prescription</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Order Processing</h4>
+                        <p>Once approved, we'll process and deliver your medicines</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Delivery</h4>
+                        <p>Get your medicines delivered to your doorstep</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
