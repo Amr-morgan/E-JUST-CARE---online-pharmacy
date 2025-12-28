@@ -21,6 +21,7 @@
         initMobileNav();
     });
 
+    
     // Cart Management
     function initCart() {
         // Update cart badge
@@ -363,35 +364,114 @@
     }
 
     // Search
-    function initSearch() {
-        var searchInputs = document.querySelectorAll('#search');
-        
-        searchInputs.forEach(function(input) {
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    var searchTerm = this.value.trim();
-                    if (searchTerm) {
-                        showNotification('Searching for: ' + searchTerm);
-                        // In real app, this would perform actual search
-                    }
-                }
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const resultsContainer = document.getElementById('search-results');
+
+        // Example product list (replace with real products or fetch from backend)
+        const products = [
+            "Paracetamol",
+            "Ibuprofen",
+            "Aspirin",
+            "Cetirizine",
+            "Amoxicillin",
+            "Loratadine",
+            "Ranitidine",
+            "Omeprazole",
+            "Metformin",
+            "Amlodipine",
+            "Atorvastatin",
+            "Simvastatin",
+            "Azithromycin",
+            "Clarithromycin",
+            "Cefixime",
+            "Fluconazole",
+            "Prednisone",
+            "Hydrocortisone",
+            "Salbutamol",
+            "Dextromethorphan"
+        ];
+
+        if (!searchInput || !resultsContainer) return;
+
+        // Helper: find a product card by name (case-insensitive)
+        function findProductCardByName(name) {
+            var cards = document.querySelectorAll('.product-card');
+            name = name.trim().toLowerCase();
+            for (var i = 0; i < cards.length; i++) {
+                var h = cards[i].querySelector('h3');
+                if (!h) continue;
+                if (h.textContent.trim().toLowerCase() === name) return cards[i];
+            }
+            // fallback: try contains
+            for (var j = 0; j < cards.length; j++) {
+                var hh = cards[j].querySelector('h3');
+                if (!hh) continue;
+                if (hh.textContent.trim().toLowerCase().includes(name)) return cards[j];
+            }
+            return null;
+        }
+
+        // Show results as user types
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            resultsContainer.innerHTML = '';
+
+            if (!query) return;
+
+            const matches = products.filter(p => p.toLowerCase().includes(query));
+
+            matches.forEach(product => {
+                    const div = document.createElement('div');
+                    div.className = 'search-result-item';
+                    div.textContent = product;
+                    div.tabIndex = 0;
+                    div.addEventListener('click', function() {
+                        searchInput.value = product;
+                        resultsContainer.innerHTML = '';
+
+                        // Scroll to product card and highlight
+                        var card = findProductCardByName(product);
+                        if (card) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            card.classList.add('search-highlight');
+                            setTimeout(function() { card.classList.remove('search-highlight'); }, 3000);
+                        } else {
+                            showNotification('No matching product on this page: ' + product);
+                        }
+                    });
+                    // allow keyboard selection
+                    div.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.click();
+                        }
+                    });
+                    resultsContainer.appendChild(div);
             });
         });
 
-        var searchButtons = document.querySelectorAll('.search-btn');
-        searchButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                var input = this.previousElementSibling || this.parentElement.querySelector('#search');
-                if (input) {
-                    var searchTerm = input.value.trim();
-                    if (searchTerm) {
-                        showNotification('Searching for: ' + searchTerm);
-                    }
+        // Close results if clicked outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+                resultsContainer.innerHTML = '';
+            }
+        });
+
+        // Optional: Search button click
+        var searchBtn = document.querySelector('.search-btn');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', function() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    resultsContainer.innerHTML = '';
+                    // Here you can redirect or fetch results from backend
+                    showNotification('Searching for: ' + query);
                 }
             });
-        });
-    }
+        }
+    });
+
 
     // Notification System
     function showNotification(message) {

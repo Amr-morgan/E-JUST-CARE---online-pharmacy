@@ -1,0 +1,109 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Checkout | E-JUST Care+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Checkout</h2>
+
+        {% if error %}
+            <div style="background-color: #fee; border: 1px solid #f99; padding: 12px; border-radius: 4px; margin-bottom: 20px; color: #c33;">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1200px;">
+            <!-- Order Summary (Left) -->
+            <div>
+                <h3 style="margin-bottom: 20px; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">Order Summary</h3>
+                <div style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
+                    {% for item in cart_items %}
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #ddd;">
+                            <div>
+                                <strong>{{ item.name }}</strong><br>
+                                <small style="color: #666;">Qty: {{ item.quantity }}</small>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong>{{ item.price|floatformat:2 }} L.E.</strong><br>
+                                <small style="color: #666;">{{ item.price|floatformat:2 }} × {{ item.quantity }}</small>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div style="padding: 20px 0; border-top: 2px solid #ddd; margin-top: 10px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold;">
+                            <span>Total:</span>
+                            <span style="color: #2563eb;">{{ total_price|floatformat:2 }} L.E.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Information Form (Right) -->
+            <div>
+                <h3 style="margin-bottom: 20px; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">Delivery Information</h3>
+                <form method="POST" action="{% url 'checkout' %}" style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
+                    {% csrf_token %}
+
+                    <!-- Customer Name -->
+                    <div style="margin-bottom: 18px;">
+                        <label for="customer_name" style="display: block; margin-bottom: 8px; font-weight: 500;">Full Name *</label>
+                        <input type="text" id="customer_name" name="customer_name" required 
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;"
+                               placeholder="Enter your full name">
+                    </div>
+
+                    <!-- Customer Email -->
+                    <div style="margin-bottom: 18px;">
+                        <label for="customer_email" style="display: block; margin-bottom: 8px; font-weight: 500;">Email Address *</label>
+                        <input type="email" id="customer_email" name="customer_email" required 
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;"
+                               placeholder="your.email@example.com">
+                    </div>
+
+                    <!-- Customer Phone -->
+                    <div style="margin-bottom: 18px;">
+                        <label for="customer_phone" style="display: block; margin-bottom: 8px; font-weight: 500;">Phone Number *</label>
+                        <input type="tel" id="customer_phone" name="customer_phone" required 
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;"
+                               placeholder="+20 1234567890">
+                    </div>
+
+                    <!-- Customer Address -->
+                    <div style="margin-bottom: 20px;">
+                        <label for="customer_address" style="display: block; margin-bottom: 8px; font-weight: 500;">Delivery Address *</label>
+                        <textarea id="customer_address" name="customer_address" required rows="4"
+                                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;"
+                                  placeholder="Enter your complete delivery address"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-bottom: 10px;">
+                        Place Order
+                    </button>
+
+                    <!-- Cancel Button -->
+                    <a href="{% url 'cart' %}" class="btn btn-secondary btn-large" style="width: 100%; text-align: center; display: block;">
+                        Return to Cart
+                    </a>
+                </form>
+
+                <!-- Info Box -->
+                <div style="background: #e8f4f8; padding: 15px; border-radius: 4px; margin-top: 20px; border-left: 4px solid #2563eb;">
+                    <strong style="color: #0c5460;">📧 Confirmation Email</strong><br>
+                    <small style="color: #555;">We'll send you an order confirmation email with your Order ID and tracking details.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Responsive Stacking -->
+        <style>
+            @media (max-width: 768px) {
+                [style*="display: grid"] {
+                    grid-template-columns: 1fr !important;
+                }
+            }
+        </style>
+    </div>
+</section>
+{% endblock %}

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -74,16 +75,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pharmacy.wsgi.application'
 
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pharmacy_db',          # your database name
+        'USER': 'pharmacy_user',        # must match exactly
+        'PASSWORD': 'pharmacy123',      # the new password
+        'HOST': '127.0.0.1',            # use 127.0.0.1, NOT localhost
+        'PORT': '5433',
     }
 }
+
+
 
 
 # Password validation
@@ -126,3 +137,22 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email Configuration - Gmail SMTP
+# For Gmail, you need:
+# 1. An app-specific password (not your regular Gmail password)
+# 2. Enable "Less secure app access" or use App Password
+# 3. Set environment variables: GMAIL_EMAIL and GMAIL_PASSWORD
+
+import os
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('GMAIL_EMAIL', 'your-email@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_PASSWORD', 'your-app-password')
+DEFAULT_FROM_EMAIL = os.environ.get('GMAIL_EMAIL', 'your-email@gmail.com')
+
+# For development, you can uncomment this to see emails in console:
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

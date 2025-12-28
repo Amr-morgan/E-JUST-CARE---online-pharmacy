@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #2563eb;
+            margin: 0;
+            font-size: 28px;
+        }
+        .order-id {
+            background-color: #f0f4ff;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #2563eb;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+        .order-id-label {
+            color: #666;
+            font-size: 12px;
+        }
+        .order-id-value {
+            color: #2563eb;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        .section {
+            margin: 25px 0;
+        }
+        .section h2 {
+            color: #333;
+            font-size: 16px;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        .info-box {
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            background-color: #fafafa;
+        }
+        .item-row:last-child {
+            border-bottom: none;
+        }
+        .item-name {
+            font-weight: bold;
+        }
+        .item-qty {
+            color: #666;
+            font-size: 12px;
+        }
+        .total-amount {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #f0f4ff;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .total-label {
+            color: #333;
+        }
+        .total-value {
+            color: #2563eb;
+        }
+        .footer {
+            background-color: #f0f4ff;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+        .footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 10px 5px;
+        }
+        .thank-you {
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 20px;
+        }
+        .thank-you h3 {
+            color: #155724;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 E-JUST Care+ Online Pharmacy</h1>
+        </div>
+
+        <div class="thank-you">
+            <h3>✅ Order Confirmation</h3>
+            <p style="margin: 10px 0 0 0;">Thank you for your order! Your prescription medicines will be prepared and shipped soon.</p>
+        </div>
+
+        <!-- Order ID -->
+        <div class="order-id">
+            <div class="order-id-label">YOUR ORDER ID</div>
+            <div class="order-id-value">{{ order.order_id }}</div>
+        </div>
+
+        <!-- Customer Information -->
+        <div class="section">
+            <h2>Customer Information</h2>
+            <div class="info-box">
+                <div class="info-row">
+                    <span><strong>Name:</strong></span>
+                    <span>{{ order.customer_name }}</span>
+                </div>
+                <div class="info-row">
+                    <span><strong>Email:</strong></span>
+                    <span>{{ order.customer_email }}</span>
+                </div>
+                <div class="info-row">
+                    <span><strong>Phone:</strong></span>
+                    <span>{{ order.customer_phone }}</span>
+                </div>
+                <div class="info-row">
+                    <span><strong>Delivery Address:</strong></span>
+                    <span>{{ order.customer_address }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Items Ordered -->
+        <div class="section">
+            <h2>Items Ordered</h2>
+            {% for item in order.items.all %}
+                <div class="item-row">
+                    <div>
+                        <div class="item-name">{{ item.product_name }}</div>
+                        <div class="item-qty">Quantity: {{ item.quantity }} × {{ item.product_price|floatformat:2 }} L.E.</div>
+                    </div>
+                    <div style="font-weight: bold;">{{ item.item_total|floatformat:2 }} L.E.</div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Total Amount -->
+        <div class="total-amount">
+            <span class="total-label">Total Amount:</span>
+            <span class="total-value">{{ total_price|floatformat:2 }} L.E.</span>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="section">
+            <h2>What's Next?</h2>
+            <div class="info-box" style="background-color: white; border: 1px solid #2563eb; border-left: 4px solid #2563eb;">
+                <p style="margin: 8px 0;"><strong>📦 Order Status:</strong> Currently pending confirmation</p>
+                <p style="margin: 8px 0;"><strong>⏱️ Processing Time:</strong> Your order will be processed within 24-48 hours</p>
+                <p style="margin: 8px 0;"><strong>🚚 Shipping:</strong> You'll receive a tracking link via email once shipped</p>
+                <p style="margin: 8px 0;"><strong>📞 Support:</strong> If you have any questions, please contact us</p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="text-align: center; margin: 25px 0;">
+            <p style="margin-bottom: 15px;">Track your order status anytime:</p>
+            <a href="http://localhost:8000/tracking/" class="cta-button">Track Your Order</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="margin: 0 0 10px 0;">
+                <strong>E-JUST Care+ Online Pharmacy</strong><br>
+                Your trusted source for quality medicines
+            </p>
+            <p style="margin: 0;">
+                📞 +201204401118 | 📧 info@ejustcarepharmacy.com
+            </p>
+            <p style="margin: 10px 0 0 0; color: #999; font-size: 11px;">
+                This is an automated email. Please do not reply directly to this email.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

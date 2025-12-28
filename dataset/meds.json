@@ -1,0 +1,22 @@
+[
+    {"med_name": "Paracetamol", "price": 10, "img_urls": ""},
+    {"med_name": "Ibuprofen", "price": 20, "img_urls": ""},
+    {"med_name": "Aspirin", "price": 15, "img_urls": ""},
+    {"med_name": "Cetirizine", "price": 12, "img_urls": ""},
+    {"med_name": "Amoxicillin", "price": 25, "img_urls": ""},
+    {"med_name": "Loratadine", "price": 18, "img_urls": ""},
+    {"med_name": "Ranitidine", "price": 22, "img_urls": ""},
+    {"med_name": "Omeprazole", "price": 30, "img_urls": ""},
+    {"med_name": "Metformin", "price": 28, "img_urls": ""},
+    {"med_name": "Amlodipine", "price": 35, "img_urls": ""},
+    {"med_name": "Atorvastatin", "price": 40, "img_urls": ""},
+    {"med_name": "Simvastatin", "price": 38, "img_urls": ""},
+    {"med_name": "Azithromycin", "price": 45, "img_urls": ""},
+    {"med_name": "Clarithromycin", "price": 42, "img_urls": ""},
+    {"med_name": "Cefixime", "price": 50, "img_urls": ""},
+    {"med_name": "Fluconazole", "price": 33, "img_urls": ""},
+    {"med_name": "Prednisone", "price": 27, "img_urls": ""},
+    {"med_name": "Hydrocortisone", "price": 19, "img_urls": ""},
+    {"med_name": "Salbutamol", "price": 21, "img_urls": ""},
+    {"med_name": "Dextromethorphan", "price": 16, "img_urls": ""}
+]

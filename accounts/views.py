@@ -7,7 +7,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()   # saves the user
-            return redirect("index")
+            return redirect("home")   # redirect after registration
     else:
         form = RegistrationForm()
 
@@ -19,7 +19,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("index")   # redirect after login
+            return redirect("home")   # redirect after login
     else:
         form = LoginForm()
     

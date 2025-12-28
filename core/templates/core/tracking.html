@@ -133,7 +133,7 @@
                                 <h4>{{ it.name }}</h4>
                                 <p>Quantity: {{ it.quantity }}</p>
                             </div>
-                            <div class="order-item-price">{{ it.price|floatformat:2 }}</div>
+                            <div class="order-item-price">{{ it.price|floatformat:2 }} L.E.</div>
                         </div>
                     {% endfor %}
                 {% else %}
@@ -143,7 +143,7 @@
                             <h4>Paracetamol 500mg</h4>
                             <p>Quantity: 1</p>
                         </div>
-                        <div class="order-item-price">$12.99</div>
+                        <div class="order-item-price">12.99 L.E.</div>
                     </div>
 
                     <div class="order-item">
@@ -152,14 +152,14 @@
                             <h4>Vitamin D3</h4>
                             <p>Quantity: 2</p>
                         </div>
-                        <div class="order-item-price">$49.98</div>
+                        <div class="order-item-price">49.98 L.E.</div>
                     </div>
                 {% endif %}
 
                 <div id="order-total" class="order-total">
                     <span>Total Amount:</span>
                     <span id="order-total-amount">
-                        {% if total %}{{ total|floatformat:2 }}{% else %}$67.97{% endif %}
+                        {% if total %}{{ total|floatformat:2 }}{% else %}67.97 L.E.{% endif %}
                     </span>
                 </div>
             </div>

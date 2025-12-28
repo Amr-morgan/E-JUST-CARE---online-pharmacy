@@ -26,91 +26,56 @@
 <!-- Categories -->
 <section class="section">
     <div class="container">
-        <h2 class="section-title">Shop by Category</h2>
+        <h2 class="section-title">What we Offer</h2>
         
         <div class="categories">
             <div class="category-item">
                 <div class="category-icon">💊</div>
                 <h3>Prescription Drugs</h3>
-                <a href="#" class="category-link">Browse</a>
             </div>
             
             <div class="category-item">
                 <div class="category-icon">🏥</div>
                 <h3>OTC Medicines</h3>
-                <a href="#" class="category-link">Browse</a>
             </div>
             
             <div class="category-item">
                 <div class="category-icon">💉</div>
                 <h3>Health Devices</h3>
-                <a href="#" class="category-link">Browse</a>
             </div>
             
             <div class="category-item">
                 <div class="category-icon">🌿</div>
                 <h3>Wellness</h3>
-                <a href="#" class="category-link">Browse</a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Featured Products -->
-<section class="section" id="medicines">
+<section class="section products-section" id="medicines">
     <div class="container">
-        <h2 class="section-title">Featured Products</h2>
+        <h2 class="section-title">Our Medicines</h2>
 
         <div class="products-grid">
-
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="product-icon">💊</span>
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/media/products/placeholder.jpg" alt="Medicine">
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ product.name }}</h3>
+                        {% if product.description %}
+                            <p class="product-description">{{ product.description }}</p>
+                        {% endif %}
+                        <div class="product-price"> {{ product.price }} L.E.</div>
+                        <form method="post" action="{% url 'add_to_cart' product.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-small btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <h3>Paracetamol 500mg</h3>
-                    <p>Pain relief medication</p>
-                    <div class="product-price">$12.99</div>
-                    <button class="btn btn-small btn-primary">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="product-icon">💊</span>
-                </div>
-                <div class="product-info">
-                    <h3>Vitamin D3</h3>
-                    <p>Vitamin supplement</p>
-                    <div class="product-price">$24.99</div>
-                    <button class="btn btn-small btn-primary">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="product-icon">🩺</span>
-                </div>
-                <div class="product-info">
-                    <h3>Blood Pressure Monitor</h3>
-                    <p>Digital monitor</p>
-                    <div class="product-price">$89.99</div>
-                    <button class="btn btn-small btn-primary">Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="product-icon">💊</span>
-                </div>
-                <div class="product-info">
-                    <h3>Omega-3 Fish Oil</h3>
-                    <p>Dietary supplement</p>
-                    <div class="product-price">$19.99</div>
-                    <button class="btn btn-small btn-primary">Add to Cart</button>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -123,7 +88,7 @@
             <div class="service-item">
                 <div class="service-icon">🚚</div>
                 <h3>Free Delivery</h3>
-                <p>On orders over $50</p>
+                <p>Fast and free delivery to your doorstep</p>
             </div>
 
             <div class="service-item">

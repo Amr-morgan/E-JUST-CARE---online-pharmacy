@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
             showError("Please fill in all fields.");
             return;
         }
-
-        // Fade out animation
-        container.classList.add("fade-out");
-
-        // Wait for animation then submit the form
-        setTimeout(() => {
-            loginForm.submit();
-        }, 700); // matches animation duration in CSS
+        
+        // Add fade-out class for animation
+       const loginForm = document.querySelector("#login-form");
+        if (loginForm) {
+            setTimeout(() => {
+                loginForm.submit();
+            }, 700);
+        }
     });
 
     // Show/Hide password functionality
